@@ -26,6 +26,11 @@ fun main() {
     complejo.recibirvalores(4,5)
     println("\nCon nuevos valores...")
     complejo.darnumeros()
-     println("\nReturn en string..")
+     println("\nReturn en string...")
     println(complejo.enstring())
 }
+
+ //_._     _,-'""`-._
+ //,-.`._,'(       |\`-/|
+ //   `-.-' \ )-`( , o o)
+ //         `-    \`_`"'-
