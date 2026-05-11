@@ -3,33 +3,39 @@
  */
 package org.example
 
-class Complejo {
-    private var real: Int = 6
-    private var imaginario : Int = 7
-
-    fun recibirvalores(real: Int, imaginario: Int){
-        this.real = real
-        this.imaginario= imaginario
-    } 
-    fun darnumeros() {
-        println("Numero complejo: ${real}+${imaginario}i")
+class Complejo(private var real: Int=0 , private var imag: Int=0) {
+     
+    fun inicializar(real:Int,imag:Int){
+        this.real=real
+        this.imag=imag
     }
-    fun enstring(): String{
-        return "(${real} + ${imaginario}i)"
+    fun mostrar(){
+        println(this.toString())
+    }
+    override fun toString():String{
+        return "(${real},${imag})"
+    }
+    fun sumar(valor: Complejo): Complejo {
+        return Complejo(real + valor.real, imag + valor.imag)
+    }
+    fun restar(valor: Complejo): Complejo {
+        return Complejo(real - valor.real, imag - valor.imag)
     }
 }
 
 fun main() {
-    val complejo: Complejo
-    complejo=Complejo()
-    complejo.darnumeros()
-    complejo.recibirvalores(4,5)
-    println("\nCon nuevos valores...")
-    complejo.darnumeros()
-     println("\nReturn en string...")
-    println(complejo.enstring())
-}
+    var complejo:Complejo= Complejo(3,4) 
+    println("mi número complejo es ${complejo.toString()}")
 
+    var c2:Complejo= Complejo(3,3)
+    var c3:Complejo= Complejo()  
+    c3 = complejo.sumar(c2)
+    c3.mostrar()
+    var c4:Complejo= Complejo()
+    c4 = complejo.restar(c2)
+    c4.mostrar()
+    
+}
 
  //_._     _,-'""`-._
  //,-.`._,'(       |\`-/|
