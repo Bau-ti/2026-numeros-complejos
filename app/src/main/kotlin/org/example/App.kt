@@ -30,18 +30,16 @@ class Complejo(private var real: Double = 0.0, private var imag: Double = 0.0) {
     // --- NUEVAS FUNCIONES ---
 
     fun multiplicar(valor: Complejo): Complejo {
-        val nuevoReal = (this.real * valor.real) - (this.imag * valor.imag)
-        val nuevoImag = (this.real * valor.imag) + (this.imag * valor.real)
-        return Complejo(nuevoReal, nuevoImag)
+        // (axc)-(bxd)
+        val resul= (real*valor.real) - (imag*valor.imag)
+        val resul2 = (real*valor.imag) + (imag*valor.real)
+        return Complejo(resul, resul2)
     }
 
     fun dividir(valor: Complejo): Complejo {
-        val denominador = valor.real.pow(2) + valor.imag.pow(2)
-        if (denominador == 0.0) throw ArithmeticException("División por cero en números complejos")
-        
-        val nuevoReal = (this.real * valor.real + this.imag * valor.imag) / denominador
-        val nuevoImag = (this.imag * valor.real - this.real * valor.imag) / denominador
-        return Complejo(nuevoReal, nuevoImag)
+        val resul= (real/valor.real) - (imag/valor.imag)
+        val resul2 = (real/valor.imag) + (imag/valor.real) 
+        return Complejo(resul, resul2)
     }
 }
 
