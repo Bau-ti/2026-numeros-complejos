@@ -3,38 +3,73 @@
  */
 package org.example
 
-class Complejo(private var real: Int=0 , private var imag: Int=0) {
-     
-    fun inicializar(real:Int,imag:Int){
-        this.real=real
-        this.imag=imag
-    }
-    fun mostrar(){
+import kotlin.math.pow
+
+class Complejo(private var real: Double = 0.0, private var imag: Double = 0.0) {
+
+    // Permite inicializar con Int por comodidad, convirtiendo a Double
+    constructor(real: Int, imag: Int) : this(real.toDouble(), imag.toDouble())
+
+    fun mostrar() {
         println(this.toString())
     }
-    override fun toString():String{
-        return "(${real},${imag})"
+
+    override fun toString(): String {
+        val signo = if (imag >= 0) "+" else "-"
+        return "($real $signo ${kotlin.math.abs(imag)}i)"
     }
+
     fun sumar(valor: Complejo): Complejo {
         return Complejo(real + valor.real, imag + valor.imag)
     }
+
     fun restar(valor: Complejo): Complejo {
         return Complejo(real - valor.real, imag - valor.imag)
+    }
+
+    // --- NUEVAS FUNCIONES ---
+
+    fun multiplicar(valor: Complejo): Complejo {
+        val nuevoReal = (this.real * valor.real) - (this.imag * valor.imag)
+        val nuevoImag = (this.real * valor.imag) + (this.imag * valor.real)
+        return Complejo(nuevoReal, nuevoImag)
+    }
+
+    fun dividir(valor: Complejo): Complejo {
+        val denominador = valor.real.pow(2) + valor.imag.pow(2)
+        if (denominador == 0.0) throw ArithmeticException("División por cero en números complejos")
+        
+        val nuevoReal = (this.real * valor.real + this.imag * valor.imag) / denominador
+        val nuevoImag = (this.imag * valor.real - this.real * valor.imag) / denominador
+        return Complejo(nuevoReal, nuevoImag)
     }
 }
 
 fun main() {
-    var complejo:Complejo= Complejo(3,4) 
-    println("mi número complejo es ${complejo.toString()}")
+    var c1 = Complejo(3.0, 4.0)
+    var c2 = Complejo(1.0, 2.0)
 
-    var c2:Complejo= Complejo(3,3)
-    var c3:Complejo= Complejo()  
-    c3 = complejo.sumar(c2)
-    c3.mostrar()
+    println("Numero 1: $c1.mostrar()")
+    println("Numero 2: $c2.mostrar()")
+
+    var c3:Complejo= Complejo()
+
+    c3 = c1.sumar(c2)
+    println("Suma entre num1 y num2: $c3.mostrar()")
+
     var c4:Complejo= Complejo()
-    c4 = complejo.restar(c2)
-    c4.mostrar()
-    
+    c4 = c1.restar(c2)
+    println("resta entre num1 y num2: $c4.mostrar()")
+
+    // Multiplicación
+    val producto = c1.multiplicar(c2)
+    print("Multiplicación entre 1 y 2: ")
+    producto.mostrar()
+
+    // División
+    val cociente = c1.dividir(c2)
+    print("División: ")
+    cociente.mostrar()
 }
 
  //_._     _,-'""`-._
